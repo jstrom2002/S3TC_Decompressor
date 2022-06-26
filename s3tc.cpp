@@ -2,78 +2,14 @@
 
 namespace S3TC
 {
-    // DXT1 (BC1) defines shifting in precalculated alpha
     uint32_t __DXT1_LUT_COLOR_SHIFT_A = 24;
-    // DXT1 (BC1) defines shifting in precalculated [R,G,B] components
     uint32_t __DXT1_LUT_COLOR_SHIFT_R = 16;
     uint32_t __DXT1_LUT_COLOR_SHIFT_G = 8;
     uint32_t __DXT1_LUT_COLOR_SHIFT_B = 0;
-
-    // DXT1 (BC1) pre calculated values for alpha codes
     uint32_t __DXT1_LUT_COLOR_VALUE_A = (uint32_t)(0xff << __DXT1_LUT_COLOR_SHIFT_A);
-
-    // DXT1 (BC1) precalculated [R,G,B] components for all 4 codes's 
     uint32_t* __DXT1_LUT_COLOR_VALUE_R = nullptr;
     uint32_t* __DXT1_LUT_COLOR_VALUE_G = nullptr;
     uint32_t* __DXT1_LUT_COLOR_VALUE_B = nullptr;
-
-
-
-    // DXT3 (BC2) defines shifting in precalculated alpha
-    uint32_t __DXT3_LUT_COLOR_SHIFT_A = 24;
-
-    // DXT3 (BC2) defines shifting in precalculated [R,G,B] components
-    uint32_t __DXT3_LUT_COLOR_SHIFT_R = 16;
-    uint32_t __DXT3_LUT_COLOR_SHIFT_G = 8;
-    uint32_t __DXT3_LUT_COLOR_SHIFT_B = 0;
-
-    // DXT3 (BC2) pre calculated values for alpha codes
-    uint32_t* __DXT3_LUT_COLOR_VALUE_A = nullptr;
-
-    // DXT3 (BC2) precalculated [R,G,B] components for all 4 codes's 
-    uint32_t* __DXT3_LUT_COLOR_VALUE_R = nullptr;
-    uint32_t* __DXT3_LUT_COLOR_VALUE_G = nullptr;
-    uint32_t* __DXT3_LUT_COLOR_VALUE_B = nullptr;
-
-
-
-    // DXT5 (BC3) defines shifting in precalculated alpha
-    uint32_t __DXT5_LUT_COLOR_SHIFT_A = 24;
-
-    // DXT5 (BC3) defines shifting in precalculated [R,G,B] components
-    uint32_t __DXT5_LUT_COLOR_SHIFT_R = 16;
-    uint32_t __DXT5_LUT_COLOR_SHIFT_G = 8;
-    uint32_t __DXT5_LUT_COLOR_SHIFT_B = 0;
-
-    // DXT5 (BC3) pre calculated values for alpha codes
-    uint32_t* __DXT5_LUT_COLOR_VALUE_A = nullptr;
-
-    // DXT5 (BC3) precalculated [R,G,B] components for all 4 codes's 
-    uint32_t* __DXT5_LUT_COLOR_VALUE_R = nullptr;
-    uint32_t* __DXT5_LUT_COLOR_VALUE_G = nullptr;
-    uint32_t* __DXT5_LUT_COLOR_VALUE_B = nullptr;
-
-
-
-    void DXT1ReleaseLUTs()
-    {
-        if (nullptr != __DXT1_LUT_COLOR_VALUE_R)
-        {
-            delete[] __DXT1_LUT_COLOR_VALUE_R;
-            __DXT1_LUT_COLOR_VALUE_R = nullptr;
-        }
-        if (nullptr != __DXT1_LUT_COLOR_VALUE_G)
-        {
-            delete[] __DXT1_LUT_COLOR_VALUE_G;
-            __DXT1_LUT_COLOR_VALUE_B = nullptr;
-        }
-        if (nullptr != __DXT1_LUT_COLOR_VALUE_B)
-        {
-            delete[] __DXT1_LUT_COLOR_VALUE_B;
-            __DXT1_LUT_COLOR_VALUE_B = nullptr;
-        }
-    }
-
 
     void __DXT1_LUT_Build()
     {
@@ -302,38 +238,25 @@ namespace S3TC
                 }//by
             }//x_block
         }//y_block
-        DXT1ReleaseLUTs();
-    }
+
+        delete[] __DXT1_LUT_COLOR_VALUE_R;
+        delete[] __DXT1_LUT_COLOR_VALUE_G;
+        delete[] __DXT1_LUT_COLOR_VALUE_B;
+   }
 
 
 
+    // --------------------------------------------------------------------------
 
 
-
-    void DXT3ReleaseLUTs()
-    {
-        if (nullptr != __DXT3_LUT_COLOR_VALUE_A)
-        {
-            delete[] __DXT3_LUT_COLOR_VALUE_A;
-            __DXT3_LUT_COLOR_VALUE_A = nullptr;
-        }
-        if (nullptr != __DXT3_LUT_COLOR_VALUE_R)
-        {
-            delete[] __DXT3_LUT_COLOR_VALUE_R;
-            __DXT3_LUT_COLOR_VALUE_R = nullptr;
-        }
-        if (nullptr != __DXT3_LUT_COLOR_VALUE_G)
-        {
-            delete[] __DXT3_LUT_COLOR_VALUE_G;
-            __DXT3_LUT_COLOR_VALUE_B = nullptr;
-        }
-        if (nullptr != __DXT3_LUT_COLOR_VALUE_B)
-        {
-            delete[] __DXT3_LUT_COLOR_VALUE_B;
-            __DXT3_LUT_COLOR_VALUE_B = nullptr;
-        }
-    }
-
+   uint32_t __DXT3_LUT_COLOR_SHIFT_A = 24;
+   uint32_t __DXT3_LUT_COLOR_SHIFT_R = 16;
+   uint32_t __DXT3_LUT_COLOR_SHIFT_G = 8;
+   uint32_t __DXT3_LUT_COLOR_SHIFT_B = 0;
+   uint32_t* __DXT3_LUT_COLOR_VALUE_A = nullptr;
+   uint32_t* __DXT3_LUT_COLOR_VALUE_R = nullptr;
+   uint32_t* __DXT3_LUT_COLOR_VALUE_G = nullptr;
+   uint32_t* __DXT3_LUT_COLOR_VALUE_B = nullptr;
     // builds static __DXT3_LUT_COLOR_VALUE_A[] look-up table
     void __DXT3_LUT_COLOR_VALUE_A_Build()
     {
@@ -551,43 +474,31 @@ namespace S3TC
                 }//by
             }//x_block
         }//y_block
-        DXT3ReleaseLUTs();
+
+        delete[] __DXT3_LUT_COLOR_VALUE_A;
+        delete[] __DXT3_LUT_COLOR_VALUE_R;
+        delete[] __DXT3_LUT_COLOR_VALUE_G;
+        delete[] __DXT3_LUT_COLOR_VALUE_B;
     }
 
 
 
 
 
+    // ----------------------------------------------------------------------
 
 
 
 
 
-
-
-    void DXT5ReleaseLUTs()
-    {
-        if (nullptr != __DXT5_LUT_COLOR_VALUE_A)
-        {
-            delete[] __DXT5_LUT_COLOR_VALUE_A;
-            __DXT5_LUT_COLOR_VALUE_A = nullptr;
-        }
-        if (nullptr != __DXT5_LUT_COLOR_VALUE_R)
-        {
-            delete[] __DXT5_LUT_COLOR_VALUE_R;
-            __DXT5_LUT_COLOR_VALUE_R = nullptr;
-        }
-        if (nullptr != __DXT5_LUT_COLOR_VALUE_G)
-        {
-            delete[] __DXT5_LUT_COLOR_VALUE_G;
-            __DXT5_LUT_COLOR_VALUE_B = nullptr;
-        }
-        if (nullptr != __DXT5_LUT_COLOR_VALUE_B)
-        {
-            delete[] __DXT5_LUT_COLOR_VALUE_B;
-            __DXT5_LUT_COLOR_VALUE_B = nullptr;
-        }
-    }
+    uint32_t __DXT5_LUT_COLOR_SHIFT_A = 24;
+    uint32_t __DXT5_LUT_COLOR_SHIFT_R = 16;
+    uint32_t __DXT5_LUT_COLOR_SHIFT_G = 8;
+    uint32_t __DXT5_LUT_COLOR_SHIFT_B = 0;
+    uint32_t* __DXT5_LUT_COLOR_VALUE_A = nullptr;
+    uint32_t* __DXT5_LUT_COLOR_VALUE_R = nullptr;
+    uint32_t* __DXT5_LUT_COLOR_VALUE_G = nullptr;
+    uint32_t* __DXT5_LUT_COLOR_VALUE_B = nullptr;
 
     void __DXT5_LUT_COLOR_VALUE_A_Build()
     {
@@ -857,6 +768,10 @@ namespace S3TC
             }//x_block
         }//y_block
 
-        DXT5ReleaseLUTs();
+
+        delete[] __DXT5_LUT_COLOR_VALUE_A;
+        delete[] __DXT5_LUT_COLOR_VALUE_R;
+        delete[] __DXT5_LUT_COLOR_VALUE_G;
+        delete[] __DXT5_LUT_COLOR_VALUE_B;
     }
 }
