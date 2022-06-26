@@ -1,11 +1,6 @@
 // From: https://github.com/SoLaRGit/openS3TC
 #pragma once
-#include <GL/glew.h> // Necessary to define GLEW.h before windows header, else there's an error
-#ifdef _WIN32
-#include <Windows.h>
-#else
-// CROSS PLATFORM CODE HERE
-#endif
+#include "stdafx.h"
 #include <stdint.h>
 #include <exception>
 
